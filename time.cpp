@@ -26,40 +26,22 @@ bool Timer::isValid() const {
 
 //operators
 bool Timer::operator<(const Timer &b) const {
-  if (m_time < b.m_time) {
-    return true;
-  }
-  return false;
+  return (m_time < b.m_time);
 }
 bool Timer::operator==(const Timer &b) const {
-  if (m_time == b.m_time) {
-    return true;
-  }
-  return false;
+    return (m_time == b.m_time);
 }
 bool Timer::operator>(const Timer &b) const {
-  if ((m_time < b.m_time) || (m_time == b.m_time)) {
-    return false;
-  }
-  return true;
+  return !(*this <= b);
 }
 bool Timer::operator<=(const Timer &b) const {
-  if (m_time > b.m_time) {
-    return false;
-  }
-  return true;
+  return (*this < b) || (*this == b);
 }
 bool Timer::operator>=(const Timer &b) const {
-  if (m_time < b.m_time) {
-    return false;
-  }
-  return true;
+  return !(*this < b);
 }
 bool Timer::operator!=(const Timer &b) const {
-  if (m_time != b.m_time) {
-    return true;
-  }
-  return false;
+  return !(*this == b);
 }
 //addition
 Timer Timer::operator+(const int seconds) const {
