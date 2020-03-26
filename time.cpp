@@ -14,10 +14,8 @@ Timer::Timer(time_t t) {
 }
 string Timer::getSVal() const {
   stringstream ss;
-  string theTime;
-  ss << m_time;
-  ss >> theTime;
-  return theTime;
+  ss << put_time(localtime(&m_time), "%m/%d/%Y %H:%M:%S");
+  return ss.str();
 }
 //test if valid time
 bool Timer::isValid() const {
@@ -26,40 +24,22 @@ bool Timer::isValid() const {
 
 //operators
 bool Timer::operator<(const Timer &b) const {
-  if (m_time < b.m_time) {
-    return true;
-  }
-  return false;
+  return (m_time < b.m_time);
 }
 bool Timer::operator==(const Timer &b) const {
-  if (m_time == b.m_time) {
-    return true;
-  }
-  return false;
+    return (m_time == b.m_time);
 }
 bool Timer::operator>(const Timer &b) const {
-  if ((m_time < b.m_time) || (m_time == b.m_time)) {
-    return false;
-  }
-  return true;
+  return !(*this <= b);
 }
 bool Timer::operator<=(const Timer &b) const {
-  if (m_time > b.m_time) {
-    return false;
-  }
-  return true;
+  return (*this < b) || (*this == b);
 }
 bool Timer::operator>=(const Timer &b) const {
-  if (m_time < b.m_time) {
-    return false;
-  }
-  return true;
+  return !(*this < b);
 }
 bool Timer::operator!=(const Timer &b) const {
-  if (m_time != b.m_time) {
-    return true;
-  }
-  return false;
+  return !(*this == b);
 }
 //addition
 Timer Timer::operator+(const int seconds) const {
@@ -81,7 +61,7 @@ Timer& Timer::operator+=(int seconds) {
 }
 //io
 ostream& operator<<(ostream& os, Timer t) {
-  os << put_time(localtime(&t.m_time), "%m/%d/%Y %H:%M:%S");
+  os << t.getSVal();
   return os;
 }
 istream& operator>>(istream& is, Timer &t) {
