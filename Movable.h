@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Vector3D.h" // Dr. Brown's 3D vector class
-#include "ATime.h"    // Your ATime header
+#include "time.h"    // Time class
 #include "Order.h"    // A place holder for the Order class
 #include <vector>
 
-// We can use typedef to define more descriptive types
-typedef std::pair<ATime, Vector3D> Location;
+typedef Timer ATime; //so I don't have to search for every ATime and replace it
+typedef std::pair<Timer, Vector3D> Location;
 typedef std::vector<Location> LocationHistory;
 
 class Movable {
@@ -28,7 +28,7 @@ public:
 
   friend std::ostream& operator<<(std::ostream& os, const Movable& movable);
   
-protected:
+  protected:
   std::string className, name, id;
   bool deployed;
   int heading, speed, maxSpeed;
