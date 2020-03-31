@@ -41,15 +41,12 @@ void Movable::setVelocity(int newHeading, int newSpeed) {
     newHeading = newHeading % 360;
     heading = newHeading;
   }
-  if ((newHeading != -1) || (newSpeed != -1)) {
-    double headingUnit = (heading - 90.0) * -1;
-    double radians = (M_PI / 180) * headingUnit;
-    double x = cos(radians) * speed;
-    double y = sin(radians) * speed;
-    Vector3D temp(x,y,0);
-    velocity = temp;
-  }
-  
+  double headingUnit = (heading - 90.0) * -1;
+  double radians = (M_PI / 180) * headingUnit;
+  double x = cos(radians) * speed;
+  double y = sin(radians) * speed;
+  Vector3D temp(x,y,0);
+  velocity = temp;
 }
 
 std::ostream& operator<<(std::ostream& os, const Movable& m) {
