@@ -34,8 +34,11 @@ const LocationHistory& Movable::getHistory() const {
 
 void Movable::setVelocity(int newHeading, int newSpeed) {
   // check newSpeed against maxSpeed, adjust newSpeed accordingly
-  if (newSpeed != -1) {
+  if (newSpeed != -1 && newSpeed <= maxSpeed) {
     speed = newSpeed;
+  }
+  else if (newSpeed > maxSpeed) {
+    speed = maxSpeed;
   }
   if (newHeading != -1) {
     newHeading = newHeading % 360;
