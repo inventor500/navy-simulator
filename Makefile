@@ -7,8 +7,8 @@ Movable.o: Movable.h time.o time.h  Movable.cpp Order.h Vector3D.h Vector3D.o
 Vector3D.o: Vector3D.h Vector3D.cpp
 	g++ -Wall -g -c -o Vector3D.o Vector3D.cpp
 Ship.o:	Vector3D.cpp Movable.cpp time.cpp
-	g++ -Wall -g -o Ship.o Ship.cpp
+	g++ -Wall -g -c -o Ship.o Ship.cpp
 
 
 clean :
-	rm -f time.o Navy Movable.o Vector3D.o
+	rm -f time.o Navy Movable.o Vector3D.o Ship.o
