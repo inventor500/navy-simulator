@@ -22,9 +22,8 @@ public:
   const LocationHistory& getHistory() const;
 
   // subclasses will be forced to implement these
-  // for now leave them commented out
-  // virtual void accept(const Order& order) = 0;
-  // virtual void updatePosition(ATime t) = 0;
+   virtual void accept(const Order& order) = 0;
+   virtual void updatePosition(ATime t) = 0;
 
   friend std::ostream& operator<<(std::ostream& os, const Movable& movable);
   
