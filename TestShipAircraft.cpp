@@ -1,6 +1,9 @@
 #include "Ship.h"
 #include "Aircraft.h"
 #include "time.h"
+#include "AircraftCarrier.h"
+#include "Cruiser.h"
+#include "Fighter.h"
 
 #include <iostream>
 
@@ -49,5 +52,9 @@ int main() {
     aircraft.updatePosition(time);
     std::cout << ship << std::endl << aircraft << "\n";
   }
+  std::cout << "\nCreating an aircraft carrier, cruiser, and fighter...\n\n";
+  AircraftCarrier carrier("Ronald Reagan","40",5000,999999);
+  Cruiser cruiser("H. W. Bush","41",2500,999999);
+  Fighter fighter("George the Cat","5",&carrier,500,999,5);
 }
 
