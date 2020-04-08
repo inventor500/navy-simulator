@@ -9,5 +9,5 @@ public:
   void deploy(ATime t, int x, int y, int heading, int speed);
   void changeOrders(int heading, int speed);
   virtual void accept(const Order& order) override;
-  virtual void updatePosition(ATime t);
+  virtual void updatePosition(ATime t) override;
 };

@@ -13,7 +13,7 @@ public:
   void land(Movable* ship);
   void changeOrders(int heading, int speed, int altitude);
   virtual void accept(const Order& order) override;
-  virtual void updatePosition(ATime t);
+  virtual void updatePosition(ATime t) override;
 
 private:
   Movable* ship;
