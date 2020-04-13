@@ -4,7 +4,7 @@
 const double feetToMiles = 6076.118; //the number of ft to 1 nautical mile
 
 Aircraft::Aircraft(std::string name, std::string id, Movable* ship, int maxSpeed, int maxAltitude)
-  :Movable(name, id, maxSpeed), ship(ship), maxAltitude(maxAltitude / feetToMiles) {
+  :Movable(name, id, maxSpeed), ship(ship), maxAltitude(maxAltitude) {
   className = "Aircraft";
 }
 
@@ -15,10 +15,16 @@ void Aircraft::takeoff(ATime t, int heading, int speed, int newAltitude) {
   ship = nullptr;
   deployed = true;
   //convert z to nautical miles
-  position.z = newAltitude / feetToMiles;
+  if (newAltitude <= maxAltitude) {
+    position.z = newAltitude / feetToMiles;
+  }
+  else {
+    position.z = maxAltitude / feetToMiles;
+  }
+    
   setVelocity(heading, speed);
   time = t;
-  updatePosition(t);
+  history.push_back({t, position});
 }
 
 void Aircraft::land(Movable* newShip) {
@@ -30,13 +36,13 @@ void Aircraft::land(Movable* newShip) {
 void Aircraft::changeOrders(int heading, int speed, int newAltitude) {
   if (isDeployed()) {
     setVelocity(heading, speed);
-    newAltitude /= feetToMiles;
-    if (newAltitude <= maxAltitude) {
-      position.z = newAltitude;
+    double doubleAltitude = newAltitude;
+    doubleAltitude /= feetToMiles;
+    if (doubleAltitude <= maxAltitude) {
+      position.z = doubleAltitude;
     }
     else {
-      //max altitude should already be in miles
-      position.z = maxAltitude;
+      position.z = (maxAltitude / feetToMiles);
     }
   }
 }
@@ -59,22 +65,21 @@ void Aircraft::updatePosition(ATime t) {
       /*Vector3D distance = ship->getPosition() - getPosition();
       Vector3D v = distance.unit();
       setVelocity(v.unit(),speed);*/
-      Vector3D direction = ship->getPosition() - position;
+      Vector3D direction = ship->getPosition();
       velocity = direction.unit() * speed;
+      //double distance = (ship->getPosition() - position).norm();
       //land
-      Vector3D nextPosition = position + dt/3600.0 * velocity;
-      double distance = (ship->getPosition() - nextPosition).norm();
-      double aircraftDistanceCovered = (velocity*dt).norm();
+      //Vector3D distance = position + dt/3600.0 * velocity;
+      double distance = (ship->getPosition() - position).norm();
+      double aircraftDistanceCovered = (velocity*(dt/3600.0)).norm();
       if (distance <= aircraftDistanceCovered) {
 	deployed = false;
+	history.push_back({t, ship->getPosition()});
       }
       //new velocity towards ship, close enough to land
-      if (distance <= aircraftDistanceCovered) {
-	deployed = false;
-      }
     }
     
-    position += dt * velocity;
+    position += (dt/3600.0) * velocity;
     Location location(t, position);
     history.push_back(location);
   }

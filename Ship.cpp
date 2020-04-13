@@ -29,7 +29,7 @@ void Ship::updatePosition(ATime t) {
   // update the ship's current position to the given ATime t
   //keep track of history here
   if (isDeployed()) {
-    position += velocity * (t - time);
+    position += velocity * ((t - time) / 3600.0);
     Location location(t, position);
     history.push_back(location);
   }
