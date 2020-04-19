@@ -1,20 +1,23 @@
 #pragma once
 
-#include "ATime.h"
+#include "time.h"
+typedef Timer ATime;
 
 // forward declarations
 class Ship;
 class Aircraft;
-
+//exceptions
+class invalid_object;
 // Abstract class to handle runtime orders
 class Order {
 public:
-  Order(std::string name, ATime time, std::string id);
+  Order(std::string name, Timer time, std::string id);
   virtual ~Order() {}
 
   ATime getTime() const;
   std::string getID() const;
-  
+  std::string getName() const;
+   
   // Define a virtual function that throws an exception for each type of
   // vessel.  It is up to subclasses of Order to override these member
   // functions for the concrete types that they can handle.
