@@ -49,7 +49,7 @@ void Aircraft::changeOrders(int heading, int speed, int newAltitude) {
 
 void Aircraft::accept(const Order& order) {
   // will be used for double dispatch when implemented, leave commented out
-  //order.execute(*this);
+  order.execute(*this);
 }
 
 void Aircraft::updatePosition(ATime t) {

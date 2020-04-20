@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Order.h"
-#include "ATime.h"
-
+#include "time.h"
+typedef Timer Atime;
 // forward declaration
 class Movable;
 class Aircraft;

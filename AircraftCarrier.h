@@ -9,3 +9,4 @@ public:
 private:
   int aircraft;
 };
+

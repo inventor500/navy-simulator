@@ -22,7 +22,7 @@ void Ship::changeOrders(int heading, int speed) {
 
 void Ship::accept(const Order& order) {
   // For use later, keep commented
-  //order.execute(*this);
+  order.execute(*this);
 }
 
 void Ship::updatePosition(ATime t) {
