@@ -1,0 +1,8 @@
+CreateCruiser USS_Texas CGN-39 50 60
+
+StartSim 3/19/2020 10:00:00
+
+DeployShip 3/19/2020 10:02:00 CGN-39 0 0 0 60
+ChangeShipOrders 3/19/2020 10:07:00 CGN-39 90 60
+
+StopSim 3/19/2020 10:10:00
