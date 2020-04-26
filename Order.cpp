@@ -7,7 +7,7 @@ class invalid_object : public runtime_error {
 public:
   invalid_object(const string& message) :runtime_error(message){}
 };
-//friend operators
+//friend operators - uses functions to get data, so that data storage method can change without changing function
 bool operator>(const Order& left, const Order& right) {
   return left.getTime() > right.getTime();
 }
@@ -30,8 +30,10 @@ Order::Order(string name, Timer time, string id)
   :name(name), time(time), id(id){}
 //virtual functions
 void Order::execute(Ship& ship) const{
-  throw invalid_object("Cannot call on base class");
+  string msg="Cannot execute " + name + " on " ship.getName();
+  throw invalid_object(msg);
 }
 void Order::execute(Aircraft& aircraft) const{
-  throw invalid_object("Cannot call on base class");
+  string msg = "Cannot execute " + name + " on " aircraft.getName();
+  throw invalid_object(msg);
 }
