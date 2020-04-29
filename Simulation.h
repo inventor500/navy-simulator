@@ -1,13 +1,17 @@
 #pragma once
 
-#include "ATime.h"
+#include "time.h"
 #include <queue>
 #include <unordered_map>
+typedef Timer ATime;
 
 // forward declarations
 class Movable;
 class Order;
 
+//exceptions
+class invalid_input;
+class object_not_found;
 // need a way to compare pointers to orders, so we make a comparison
 // class that dereferences the two points that it's comparing
 class PointerCompare {
