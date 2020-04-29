@@ -10,6 +10,6 @@ int main(int argc, char* argv[]) {
     sim.execute(argv[1], argv[2]);
   }
   catch (std::exception& e) {
-    std::cout << e.what() << std::endl;
+    std::cerr << e.what() << std::endl;
   }
 }
