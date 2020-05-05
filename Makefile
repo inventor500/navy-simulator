@@ -1,5 +1,5 @@
-Navy: time.o time.h TestShipAircraft.o Movable.o Ship.o Aircraft.o Cruiser.o AircraftCarrier.o Fighter.o Order.o TestOrder.cpp OrderAircraft.o OrderShip.o
-	g++ -Wall -Wextra -g -o Navy time.o Movable.o TestOrder.cpp Vector3D.o Ship.o Aircraft.o Fighter.o AircraftCarrier.o Cruiser.o Order.o OrderAircraft.o OrderShip.o
+Navy: time.o time.h TestShipAircraft.o Movable.o Ship.o Aircraft.o Cruiser.o AircraftCarrier.o Fighter.o Order.o OrderAircraft.o OrderShip.o Simulation.o TestSimulation.cpp
+	g++ -Wall -Wextra -g -std=c++17 -o Navy time.o Movable.o Vector3D.o Ship.o Aircraft.o Fighter.o AircraftCarrier.o Cruiser.o Order.o OrderAircraft.o OrderShip.o Simulation.o TestSimulation.cpp
 time.o: time.h time.cpp
 	g++ -Wall -Wextra -g -c -o time.o time.cpp
 Movable.o: Movable.h time.o time.h  Movable.cpp Order.h Vector3D.h Vector3D.o
@@ -22,6 +22,8 @@ OrderAircraft.o: Order.o OrderAircraft.cpp
 	g++ -Wall -Wextra -g -c -o OrderAircraft.o OrderAircraft.cpp
 OrderShip.o: Order.o OrderShip.cpp
 	g++ -Wall -Wextra -g -c -o OrderShip.o OrderShip.cpp
+Simulation.o: Movable.o Order.o OrderAircraft.o OrderShip.o time.o Output.h Simulation.cpp
+	g++ -Wall -Wextra -std=c++17 -g -c -o Simulation.o Simulation.cpp
 
 clean :
-	rm -f time.o Navy Movable.o time.o Vector3D.o Ship.o Aircraft.o Cruiser.o AircraftCarrier.o Fighter.o Order.o OrderAircraft.o OrderShip.o TestShipAircraft.o
+	rm -f time.o Navy Movable.o time.o Vector3D.o Ship.o Aircraft.o Cruiser.o AircraftCarrier.o Fighter.o Order.o OrderAircraft.o OrderShip.o TestShipAircraft.o Simulation.o

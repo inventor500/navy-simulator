@@ -11,7 +11,9 @@ void Ship::deploy(ATime t, int x, int y, int heading, int speed) {
   position.x = x;
   position.y = y;
   setVelocity(heading, speed);
-  updatePosition(t);
+  //updatePosition(t);
+  Location location(t, position);
+  history.push_back(location);
   deployed = true;
   time = t;
 }
