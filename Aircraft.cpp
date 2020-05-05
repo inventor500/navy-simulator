@@ -8,15 +8,13 @@ Aircraft::Aircraft(std::string name, std::string id, Movable* ship, int maxSpeed
   className = "Aircraft";
 }
 
-void Aircraft::takeoff(ATime t, int heading, int speed, int newAltitude) {
-  // take off from the ship's position with given heading, speed, altitude
-  // remember to "detach" yourself from the ship: ship = nullptr;
+void Aircraft::takeoff(Timer t, int heading, int speed, int newAltitude) {
   position = ship->getPosition();
-  ship = nullptr;
+  ship = nullptr; //this is used again when landing
   deployed = true;
   Location takeOffLocation(t,position);
   history.push_back(takeOffLocation);
-  //convert z to nautical miles
+    //convert z to nautical miles
   if (newAltitude <= maxAltitude) {
     position.z = newAltitude / feetToMiles;
   }
@@ -30,9 +28,8 @@ void Aircraft::takeoff(ATime t, int heading, int speed, int newAltitude) {
 }
 
 void Aircraft::land(Movable* newShip) {
+  //angling toward ship is done in updatePosition(Timer)
   ship = newShip;
-  // attach yourself to this ship
-  //find the direction towards the ship, set velocity to that, and land when the distance between ship and aircraft is what will be covered in one second
 }
 
 void Aircraft::changeOrders(int heading, int speed, int newAltitude) {
@@ -49,37 +46,24 @@ void Aircraft::changeOrders(int heading, int speed, int newAltitude) {
   }
 }
 
-void Aircraft::accept(const Order& order) {
-  // will be used for double dispatch when implemented, leave commented out
+void Aircraft::accept(const Order& order) { //double dispatch
   order.execute(*this);
 }
 
 void Aircraft::updatePosition(Timer t) {
-  int dt = t - time;
-  // you have to handle two cases here:
-  // 1. flying in a straight line (when not attached to a ship)
-  // 2. landing (when attached to a ship)
-  // when landing always update your velocity to point to the ship's
-  // current location
+  int dt = t - time; //difference in time
   if (isDeployed()) {
-    if (ship != nullptr) {
-      //angle towards ship for landing
-      /*Vector3D distance = ship->getPosition() - getPosition();
-      Vector3D v = distance.unit();
-      setVelocity(v.unit(),speed);*/
+    if (ship != nullptr) { //if aircraft is landing
       Vector3D direction = ship->getPosition() - position;
       velocity = direction.unit() * speed;
-      //double distance = (ship->getPosition() - position).norm();
-      //land
-      //Vector3D distance = position + dt/3600.0 * velocity;
       double distance = (ship->getPosition() - position).norm();
       double aircraftDistanceCovered = (velocity*(dt/3600.0)).norm();
-      if (distance <= aircraftDistanceCovered) {
+      if (distance <= aircraftDistanceCovered) { //if ship is close enough to land
 	deployed = false;
 	history.push_back({t, ship->getPosition()});
       }
-      //new velocity towards ship, close enough to land
     }
+    //move forward
     position += (dt/3600.0) * velocity;
     Location location(t, position);
     history.push_back(location);

@@ -1,11 +1,10 @@
 #pragma once
 
 #include "Vector3D.h" // Dr. Brown's 3D vector class
-#include "time.h"    // Time class
-#include "Order.h"    // A place holder for the Order class
+#include "time.h"
+#include "Order.h"
 #include <vector>
 
-typedef Timer ATime; //so I don't have to search for every ATime and replace it
 typedef std::pair<Timer, Vector3D> Location;
 typedef std::vector<Location> LocationHistory;
 
@@ -23,7 +22,7 @@ public:
 
   // subclasses will be forced to implement these
    virtual void accept(const Order& order) = 0;
-   virtual void updatePosition(ATime t) = 0;
+   virtual void updatePosition(Timer t) = 0;
 
   friend std::ostream& operator<<(std::ostream& os, const Movable& movable);
   
@@ -32,7 +31,7 @@ public:
   bool deployed;
   int heading, speed, maxSpeed;
   Vector3D position, velocity;
-  ATime time;
+  Timer time;
   LocationHistory history;
 
   // set the velocity vector from heading and speed

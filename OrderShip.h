@@ -2,7 +2,7 @@
 
 #include "Order.h"
 #include "time.h"
-typedef Timer Atime;
+
 // forward declarations
 class Ship;
 
@@ -10,9 +10,7 @@ class Ship;
 // concrete orders
 class DeployShip : public Order {
 public:
-  DeployShip(ATime time, std::string id, int x, int y, int heading, int speed);
-
-  // This order can only be executed on Ships
+  DeployShip(Timer time, std::string id, int x, int y, int heading, int speed);
   void execute(Ship& ship) const override;
   
 private:
@@ -22,7 +20,7 @@ private:
 
 class ChangeShipOrders : public Order {
 public:
-  ChangeShipOrders(ATime time, std::string id, int heading, int speed);
+  ChangeShipOrders(Timer time, std::string id, int heading, int speed);
   void execute(Ship& ship) const override;
 
 private:

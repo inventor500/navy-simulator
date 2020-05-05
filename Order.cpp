@@ -30,10 +30,10 @@ Order::Order(string name, Timer time, string id)
   :name(name), time(time), id(id){}
 //virtual functions
 void Order::execute(Ship& ship) const{
-  string msg= "Cannot execute " + name + " on this object.";
+  string msg= "Cannot execute " + name + " on this ship.";
   throw invalid_object(msg);
 }
 void Order::execute(Aircraft& aircraft) const{
-  string msg = "Cannot execute " + name + " on this object.";
+  string msg = "Cannot execute " + name + " on this ship.";
   throw invalid_object(msg);
 }

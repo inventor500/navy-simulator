@@ -11,9 +11,7 @@ class Aircraft;
 // concrete orders
 class DeployAircraft : public Order {
 public:
-  DeployAircraft(ATime time, std::string id, int heading, int speed, int altitude);
-
-  // This order only can be executed on Aircraft
+  DeployAircraft(Timer time, std::string id, int heading, int speed, int altitude);
   void execute(Aircraft& aircraft) const override;
   
 private:
@@ -23,7 +21,7 @@ private:
 
 class LandAircraft : public Order {
 public:
-  LandAircraft(ATime time, std::string aircraftID, Movable* ship);
+  LandAircraft(Timer time, std::string aircraftID, Movable* ship);
   void execute(Aircraft& aircraft) const override;
   
 private:
@@ -33,7 +31,7 @@ private:
 
 class ChangeAircraftOrders : public Order {
 public:
-  ChangeAircraftOrders(ATime time, std::string id, int heading, int speed, int altitude);
+  ChangeAircraftOrders(Timer time, std::string id, int heading, int speed, int altitude);
   void execute(Aircraft& aircraft) const override;
 
 private:

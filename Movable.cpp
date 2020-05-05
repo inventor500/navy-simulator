@@ -33,8 +33,7 @@ const LocationHistory& Movable::getHistory() const {
 }
 
 void Movable::setVelocity(int newHeading, int newSpeed) {
-  // check newSpeed against maxSpeed, adjust newSpeed accordingly
-  if (newSpeed != -1 && newSpeed <= maxSpeed) {
+  if (newSpeed != -1 && newSpeed <= maxSpeed) { //-1 is do not update value
     speed = newSpeed;
   }
   else if (newSpeed > maxSpeed) {
@@ -59,6 +58,5 @@ std::ostream& operator<<(std::ostream& os, const Movable& m) {
   if (m.isDeployed() == false) {
     os << " Not Deployed.";
   }
-
   return os;
 }
