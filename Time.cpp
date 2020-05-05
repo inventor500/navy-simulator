@@ -1,4 +1,4 @@
-#include "time.h"
+#include "Time.h"
 using namespace std;
 
 Timer::Timer() {

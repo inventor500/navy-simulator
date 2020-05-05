@@ -16,7 +16,7 @@ ostream& operator<<(std::ostream& os, const Order& order) {
   return os;
 }
 //query data
-ATime Order::getTime() const {
+Timer Order::getTime() const {
   return time;
 }
 string Order::getID() const{

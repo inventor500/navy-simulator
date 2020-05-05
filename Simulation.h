@@ -1,9 +1,8 @@
 #pragma once
 
-#include "time.h"
+#include "Time.h"
 #include <queue>
 #include <unordered_map>
-typedef Timer ATime;
 
 // forward declarations
 class Movable;
@@ -55,7 +54,7 @@ private:
   void changeShipOrders(std::istringstream& stream);
   void changeAircraftOrders(std::istringstream& stream);
   
-  ATime start, stop, current;
+  Timer start, stop, current;
   Orders orders;
   Navy navy;
 };

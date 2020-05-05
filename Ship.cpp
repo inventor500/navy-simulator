@@ -5,7 +5,7 @@ Ship::Ship(std::string name, std::string id, int maxSpeed)
   className = "Ship";
 }
 
-void Ship::deploy(ATime t, int x, int y, int heading, int speed) {
+void Ship::deploy(Timer t, int x, int y, int heading, int speed) {
   position.x = x;
   position.y = y;
   setVelocity(heading, speed);
@@ -23,7 +23,7 @@ void Ship::accept(const Order& order) {
   order.execute(*this);
 }
 
-void Ship::updatePosition(ATime t) {
+void Ship::updatePosition(Timer t) {
   if (isDeployed()) {
     position += velocity * ((t - time) / 3600.0);
     Location location(t, position);

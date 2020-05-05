@@ -1,8 +1,6 @@
 #pragma once
 
-#include "time.h"
-typedef Timer ATime;
-
+#include "Time.h"
 // forward declarations
 class Ship;
 class Aircraft;
@@ -14,7 +12,7 @@ public:
   Order(std::string name, Timer time, std::string id);
   virtual ~Order() {}
 
-  ATime getTime() const;
+  Timer getTime() const;
   std::string getID() const;
   std::string getName() const;
    
@@ -33,7 +31,7 @@ public:
 protected:
   // Common attributes for all Movable objects in simulation
   std::string name;
-  ATime time;
+  Timer time;
   std::string id;
 };
 
