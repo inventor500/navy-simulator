@@ -181,8 +181,8 @@ void Simulation::write(const std::string& filename) {
   // export history
   std::ofstream output(filename);
   output << "{" << std::endl;
-  int counter = 0;
-  int N = navy.size()-1;
+  size_t counter = 0;
+  size_t N = navy.size()-1;
   for (auto [id, movable] : navy) {
     output << "  " << quote(id) << ": {" << std::endl;
     std::vector<int> time;
