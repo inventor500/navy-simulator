@@ -7,7 +7,7 @@ class invalid_object : public runtime_error {
 public:
   invalid_object(const string& message) :runtime_error(message){}
 };
-//friend operators - uses functions to get data, so that data storage method can change without changing function
+//friend operators
 bool operator>(const Order& left, const Order& right) {
   return left.getTime() > right.getTime();
 }
@@ -29,11 +29,11 @@ string Order::getName() const{
 Order::Order(string name, Timer time, string id)
   :name(name), time(time), id(id){}
 //virtual functions
-void Order::execute(Ship& ship) const{
-  string msg= "Cannot execute " + name + " on this ship.";
+void Order::execute(Ship&) const{
+  string msg= "Cannot execute " + name + " on this object.";
   throw invalid_object(msg);
 }
-void Order::execute(Aircraft& aircraft) const{
-  string msg = "Cannot execute " + name + " on this ship.";
+void Order::execute(Aircraft&) const{
+  string msg = "Cannot execute " + name + " on this object.";
   throw invalid_object(msg);
 }
