@@ -31,6 +31,7 @@ public:
   ~Simulation();
 
   void execute(const std::string& input, const std::string& output);
+  void setVerbose(bool v);
   
 private:
   // interacting with files
@@ -57,4 +58,5 @@ private:
   Timer start, stop, current;
   Orders orders;
   Navy navy;
+  bool verbose = false;
 };

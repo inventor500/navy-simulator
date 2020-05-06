@@ -70,6 +70,10 @@ void Simulation::execute(const std::string& input, const std::string& output) {
   write(output);
 }
 
+void Simulation::setVerbose(bool v) {
+  verbose = v;
+};
+
 void Simulation::parse(const std::string& filename) {
   ifstream fin;
   fin.open(filename);
@@ -78,8 +82,9 @@ void Simulation::parse(const std::string& filename) {
   }
   string line;
   while (getline(fin,line)) {
-    cout << ">>> " << line << endl;
-    
+    if (verbose == true) {
+      cout << ">>> " << line << endl;
+    }
     //remove indentation
     while(isspace(line[0])) {
       line.erase(0,1);
@@ -92,7 +97,9 @@ void Simulation::parse(const std::string& filename) {
     string order;
     ss >> order;
     //creation orders
-    cout << order << endl;
+    if (verbose == true) {
+      cout << order << endl;
+    }
     if (order == "CreateCruiser") {
       createCruiser(ss);
     }
